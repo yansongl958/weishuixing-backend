@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "articals",
+  "info": {
+    "singularName": "artical",
+    "pluralName": "articals",
+    "displayName": "Artical"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "text"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "cover": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "categore": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::categore.categore",
+      "inversedBy": "articals"
+    },
+    "visiblity": {
+      "type": "enumeration",
+      "default": "public",
+      "enum": [
+        "public",
+        "member",
+        "vip"
+      ]
+    }
+  }
+}

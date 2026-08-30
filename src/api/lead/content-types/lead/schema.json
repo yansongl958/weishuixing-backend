@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "leads",
+  "info": {
+    "singularName": "lead",
+    "pluralName": "leads",
+    "displayName": "Lead"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "company": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "position": {
+      "type": "string"
+    },
+    "lead_type": {
+      "type": "enumeration",
+      "enum": [
+        "training_register",
+        "brochure_download",
+        "consulting_booking",
+        "expert_connect"
+      ]
+    },
+    "remark": {
+      "type": "text"
+    },
+    "target_title": {
+      "type": "string"
+    }
+  }
+}

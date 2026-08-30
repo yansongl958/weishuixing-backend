@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_services_case_items",
+  "info": {
+    "displayName": "Case Item",
+    "icon": "arrowDown"
+  },
+  "options": {},
+  "attributes": {
+    "client_name": {
+      "type": "string"
+    },
+    "result_data": {
+      "type": "string"
+    },
+    "case_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}
