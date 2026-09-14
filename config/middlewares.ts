@@ -8,7 +8,12 @@ const config: Core.Config.Middlewares = [
   'strapi::poweredBy',
   'strapi::query',
   'strapi::body',
-  'strapi::session',
+    {
+    name: 'strapi::session',
+    config: {
+      proxy: true,
+    },
+  },
   'strapi::favicon',
   'strapi::public',
 ];
