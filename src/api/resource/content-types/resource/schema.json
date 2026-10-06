@@ -1,0 +1,76 @@
+{
+  "kind": "collectionType",
+  "collectionName": "resources",
+  "info": {
+    "singularName": "resource",
+    "pluralName": "resources",
+    "displayName": "资料"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "summary": {
+      "type": "text"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "courseware",
+        "whitepaper",
+        "policy",
+        "template",
+        "spec"
+      ]
+    },
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "access_level": {
+      "type": "enumeration",
+      "default": "member",
+      "enum": [
+        "member",
+        "attendee"
+      ]
+    },
+    "event": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event.event",
+      "inversedBy": "resources"
+    },
+    "download_logs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::download-log.download-log",
+      "mappedBy": "resource"
+    },
+    "unlock_date": {
+      "type": "date"
+    },
+    "download_count": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

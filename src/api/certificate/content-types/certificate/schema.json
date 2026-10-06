@@ -1,0 +1,77 @@
+{
+  "kind": "collectionType",
+  "collectionName": "certificates",
+  "info": {
+    "singularName": "certificate",
+    "pluralName": "certificates",
+    "displayName": "证书"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "certificate_no": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "holder_name": {
+      "type": "string",
+      "required": true
+    },
+    "company": {
+      "type": "string"
+    },
+    "course_title": {
+      "type": "string",
+      "required": true
+    },
+    "issue_date": {
+      "type": "date"
+    },
+    "class_hours": {
+      "type": "integer"
+    },
+    "cert_status": {
+      "type": "enumeration",
+      "default": "valid",
+      "enum": [
+        "valid",
+        "revoke"
+      ]
+    },
+    "event": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event.event",
+      "inversedBy": "certificates"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "certificates"
+    },
+    "cert_type": {
+      "type": "enumeration",
+      "default": "completion",
+      "enum": [
+        "completion",
+        "honor"
+      ]
+    },
+    "honor_title": {
+      "type": "string"
+    },
+    "issuer": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::issuer.issuer",
+      "inversedBy": "certificates"
+    },
+    "remark": {
+      "type": "text"
+    }
+  }
+}

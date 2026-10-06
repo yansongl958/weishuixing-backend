@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "issuers",
+  "info": {
+    "singularName": "issuer",
+    "pluralName": "issuers",
+    "displayName": "发证机构"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "short_name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "intro": {
+      "type": "text"
+    },
+    "official_url": {
+      "type": "string"
+    },
+    "authorization_note": {
+      "type": "string"
+    },
+    "certificates": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::certificate.certificate",
+      "mappedBy": "issuer"
+    }
+  }
+}

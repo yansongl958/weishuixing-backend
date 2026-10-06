@@ -99,6 +99,24 @@
     "verified": {
       "type": "boolean",
       "default": false
+    },
+    "enrollments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::enrollment.enrollment",
+      "mappedBy": "user"
+    },
+    "download_logs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::download-log.download-log",
+      "mappedBy": "user"
+    },
+    "certificates": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::certificate.certificate",
+      "mappedBy": "user"
     }
   }
 }

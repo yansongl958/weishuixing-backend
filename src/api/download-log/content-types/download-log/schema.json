@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "download_logs",
+  "info": {
+    "singularName": "download-log",
+    "pluralName": "download-logs",
+    "displayName": "下载记录"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "download_logs"
+    },
+    "resource": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::resource.resource",
+      "inversedBy": "download_logs"
+    }
+  }
+}

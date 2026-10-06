@@ -58,6 +58,30 @@
         "videos",
         "audios"
       ]
+    },
+    "resources": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::resource.resource",
+      "mappedBy": "event"
+    },
+    "enrollments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::enrollment.enrollment",
+      "mappedBy": "event"
+    },
+    "member_price": {
+      "type": "string"
+    },
+    "replay_url": {
+      "type": "string"
+    },
+    "certificates": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::certificate.certificate",
+      "mappedBy": "event"
     }
   }
 }
