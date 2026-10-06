@@ -77,6 +77,28 @@
     "phone": {
       "type": "string",
       "unique": true
+    },
+    "real_name": {
+      "type": "string"
+    },
+    "company": {
+      "type": "string"
+    },
+    "position": {
+      "type": "string"
+    },
+    "user_type": {
+      "type": "enumeration",
+      "enum": [
+        "water_utility",
+        "vendor",
+        "design_institute",
+        "other"
+      ]
+    },
+    "verified": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
