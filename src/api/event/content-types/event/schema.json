@@ -82,6 +82,9 @@
       "relation": "oneToMany",
       "target": "api::certificate.certificate",
       "mappedBy": "event"
+    },
+    "end_date": {
+      "type": "date"
     }
   }
 }
