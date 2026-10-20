@@ -4,7 +4,7 @@
   "info": {
     "singularName": "enrollment",
     "pluralName": "enrollments",
-    "displayName": "学员记录"
+    "displayName": "Enrollment"
   },
   "options": {
     "draftAndPublish": false

@@ -4,7 +4,7 @@
   "info": {
     "singularName": "certificate",
     "pluralName": "certificates",
-    "displayName": "证书"
+    "displayName": "Certification"
   },
   "options": {
     "draftAndPublish": false

@@ -20,7 +20,7 @@
     "institution": {
       "type": "string"
     },
-    "domain": {
+    "specialty": {
       "type": "string"
     },
     "bio": {
@@ -44,6 +44,36 @@
       "relation": "manyToMany",
       "target": "api::event.event",
       "mappedBy": "experts"
+    },
+    "topics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::topic.topic",
+      "mappedBy": "experts"
+    },
+    "led_studios": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::studio.studio",
+      "mappedBy": "lead_expert"
+    },
+    "member_studios": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::studio.studio",
+      "mappedBy": "members"
+    },
+    "resources": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::resource.resource",
+      "inversedBy": "experts"
+    },
+    "articals": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::artical.artical",
+      "mappedBy": "authors"
     }
   }
 }

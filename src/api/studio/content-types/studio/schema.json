@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "studios",
+  "info": {
+    "singularName": "studio",
+    "pluralName": "studios",
+    "displayName": "明师工作室"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "topics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::topic.topic",
+      "inversedBy": "studios"
+    },
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "intro": {
+      "type": "text"
+    },
+    "content": {
+      "type": "blocks"
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "lead_expert": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::expert.expert",
+      "inversedBy": "led_studios"
+    },
+    "members": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::expert.expert",
+      "inversedBy": "member_studios"
+    }
+  }
+}

@@ -85,6 +85,12 @@
     },
     "end_date": {
       "type": "date"
+    },
+    "topics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::topic.topic",
+      "mappedBy": "events"
     }
   }
 }

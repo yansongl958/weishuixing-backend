@@ -454,6 +454,8 @@ export interface ApiArticalArtical extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    author_name: Schema.Attribute.String;
+    authors: Schema.Attribute.Relation<'manyToMany', 'api::expert.expert'>;
     categore: Schema.Attribute.Relation<'manyToOne', 'api::categore.categore'>;
     content: Schema.Attribute.RichText;
     cover: Schema.Attribute.Media<
@@ -463,6 +465,7 @@ export interface ApiArticalArtical extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    in_news: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -472,6 +475,7 @@ export interface ApiArticalArtical extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     summary: Schema.Attribute.Text;
     title: Schema.Attribute.String;
+    topics: Schema.Attribute.Relation<'manyToMany', 'api::topic.topic'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -513,7 +517,7 @@ export interface ApiCategoreCategore extends Struct.CollectionTypeSchema {
 export interface ApiCertificateCertificate extends Struct.CollectionTypeSchema {
   collectionName: 'certificates';
   info: {
-    displayName: '\u8BC1\u4E66';
+    displayName: 'Certification';
     pluralName: 'certificates';
     singularName: 'certificate';
   };
@@ -558,7 +562,7 @@ export interface ApiCertificateCertificate extends Struct.CollectionTypeSchema {
 export interface ApiDownloadLogDownloadLog extends Struct.CollectionTypeSchema {
   collectionName: 'download_logs';
   info: {
-    displayName: '\u4E0B\u8F7D\u8BB0\u5F55';
+    displayName: 'Download';
     pluralName: 'download-logs';
     singularName: 'download-log';
   };
@@ -590,7 +594,7 @@ export interface ApiDownloadLogDownloadLog extends Struct.CollectionTypeSchema {
 export interface ApiEnrollmentEnrollment extends Struct.CollectionTypeSchema {
   collectionName: 'enrollments';
   info: {
-    displayName: '\u5B66\u5458\u8BB0\u5F55';
+    displayName: 'Enrollment';
     pluralName: 'enrollments';
     singularName: 'enrollment';
   };
@@ -668,6 +672,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     syllabus: Schema.Attribute.Blocks;
     target_audience: Schema.Attribute.String;
     title: Schema.Attribute.String;
+    topics: Schema.Attribute.Relation<'manyToMany', 'api::topic.topic'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -685,24 +690,35 @@ export interface ApiExpertExpert extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    articals: Schema.Attribute.Relation<'manyToMany', 'api::artical.artical'>;
     avatar: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     bio: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    domain: Schema.Attribute.String;
     events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
     institution: Schema.Attribute.String;
+    led_studios: Schema.Attribute.Relation<'oneToMany', 'api::studio.studio'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::expert.expert'
     > &
       Schema.Attribute.Private;
+    member_studios: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::studio.studio'
+    >;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    resources: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::resource.resource'
+    >;
     sort_order: Schema.Attribute.BigInteger;
+    specialty: Schema.Attribute.String;
     title: Schema.Attribute.String;
+    topics: Schema.Attribute.Relation<'manyToMany', 'api::topic.topic'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -712,7 +728,7 @@ export interface ApiExpertExpert extends Struct.CollectionTypeSchema {
 export interface ApiIssuerIssuer extends Struct.CollectionTypeSchema {
   collectionName: 'issuers';
   info: {
-    displayName: '\u53D1\u8BC1\u673A\u6784';
+    displayName: 'Issuer';
     pluralName: 'issuers';
     singularName: 'issuer';
   };
@@ -762,6 +778,7 @@ export interface ApiLeadLead extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    expert: Schema.Attribute.Relation<'oneToOne', 'api::expert.expert'>;
     lead_type: Schema.Attribute.Enumeration<
       [
         'training_register',
@@ -779,6 +796,7 @@ export interface ApiLeadLead extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     remark: Schema.Attribute.Text;
     target_title: Schema.Attribute.String;
+    topic: Schema.Attribute.Relation<'oneToOne', 'api::topic.topic'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -825,7 +843,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
 export interface ApiResourceResource extends Struct.CollectionTypeSchema {
   collectionName: 'resources';
   info: {
-    displayName: '\u8D44\u6599';
+    displayName: 'Resource';
     pluralName: 'resources';
     singularName: 'resource';
   };
@@ -835,19 +853,32 @@ export interface ApiResourceResource extends Struct.CollectionTypeSchema {
   attributes: {
     access_level: Schema.Attribute.Enumeration<['member', 'attendee']> &
       Schema.Attribute.DefaultTo<'member'>;
+    author_name: Schema.Attribute.String;
     category: Schema.Attribute.Enumeration<
-      ['courseware', 'whitepaper', 'policy', 'template', 'spec']
+      [
+        'courseware',
+        'whitepaper',
+        'policy',
+        'template',
+        'spec',
+        'article',
+        'standard',
+        'solution',
+        'case',
+      ]
     >;
     cover: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    date: Schema.Attribute.Date;
     download_count: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     download_logs: Schema.Attribute.Relation<
       'oneToMany',
       'api::download-log.download-log'
     >;
     event: Schema.Attribute.Relation<'manyToOne', 'api::event.event'>;
+    experts: Schema.Attribute.Relation<'manyToMany', 'api::expert.expert'>;
     file: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -856,44 +887,15 @@ export interface ApiResourceResource extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    source: Schema.Attribute.String;
     summary: Schema.Attribute.Text;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+    topics: Schema.Attribute.Relation<'manyToMany', 'api::topic.topic'>;
     unlock_date: Schema.Attribute.Date;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-  };
-}
-
-export interface ApiServiceService extends Struct.CollectionTypeSchema {
-  collectionName: 'services';
-  info: {
-    displayName: 'Service';
-    pluralName: 'services';
-    singularName: 'service';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    cases: Schema.Attribute.Component<'services.case-item', true>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
-    framework_points: Schema.Attribute.Blocks;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::service.service'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'name'>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
+    url: Schema.Attribute.String;
   };
 }
 
@@ -930,6 +932,78 @@ export interface ApiSiteSettingSiteSetting extends Struct.SingleTypeSchema {
     wechat_qrcode: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
+  };
+}
+
+export interface ApiStudioStudio extends Struct.CollectionTypeSchema {
+  collectionName: 'studios';
+  info: {
+    displayName: '\u660E\u5E08\u5DE5\u4F5C\u5BA4';
+    pluralName: 'studios';
+    singularName: 'studio';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.Blocks;
+    cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    intro: Schema.Attribute.Text;
+    lead_expert: Schema.Attribute.Relation<'manyToOne', 'api::expert.expert'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::studio.studio'
+    > &
+      Schema.Attribute.Private;
+    members: Schema.Attribute.Relation<'manyToMany', 'api::expert.expert'>;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'name'>;
+    topics: Schema.Attribute.Relation<'manyToMany', 'api::topic.topic'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTopicTopic extends Struct.CollectionTypeSchema {
+  collectionName: 'topics';
+  info: {
+    displayName: '\u4E13\u9898';
+    pluralName: 'topics';
+    singularName: 'topic';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    articals: Schema.Attribute.Relation<'manyToMany', 'api::artical.artical'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
+    experts: Schema.Attribute.Relation<'manyToMany', 'api::expert.expert'>;
+    intro: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    order: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    resources: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::resource.resource'
+    >;
+    slug: Schema.Attribute.UID;
+    studios: Schema.Attribute.Relation<'manyToMany', 'api::studio.studio'>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1476,8 +1550,9 @@ declare module '@strapi/strapi' {
       'api::lead.lead': ApiLeadLead;
       'api::product.product': ApiProductProduct;
       'api::resource.resource': ApiResourceResource;
-      'api::service.service': ApiServiceService;
       'api::site-setting.site-setting': ApiSiteSettingSiteSetting;
+      'api::studio.studio': ApiStudioStudio;
+      'api::topic.topic': ApiTopicTopic;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

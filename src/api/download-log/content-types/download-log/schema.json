@@ -4,7 +4,7 @@
   "info": {
     "singularName": "download-log",
     "pluralName": "download-logs",
-    "displayName": "下载记录"
+    "displayName": "Download"
   },
   "options": {
     "draftAndPublish": false

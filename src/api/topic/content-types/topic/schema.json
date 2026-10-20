@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "topics",
+  "info": {
+    "singularName": "topic",
+    "pluralName": "topics",
+    "displayName": "专题"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid"
+    },
+    "intro": {
+      "type": "text"
+    },
+    "order": {
+      "type": "integer"
+    },
+    "articals": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::artical.artical",
+      "inversedBy": "topics"
+    },
+    "experts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::expert.expert",
+      "inversedBy": "topics"
+    },
+    "events": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::event.event",
+      "inversedBy": "topics"
+    },
+    "resources": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::resource.resource",
+      "inversedBy": "topics"
+    },
+    "studios": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::studio.studio",
+      "mappedBy": "topics"
+    }
+  }
+}

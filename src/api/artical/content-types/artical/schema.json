@@ -44,6 +44,25 @@
         "member",
         "vip"
       ]
+    },
+    "topics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::topic.topic",
+      "mappedBy": "articals"
+    },
+    "author_name": {
+      "type": "string"
+    },
+    "authors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::expert.expert",
+      "inversedBy": "articals"
+    },
+    "in_news": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

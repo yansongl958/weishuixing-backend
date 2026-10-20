@@ -37,6 +37,16 @@
     },
     "target_title": {
       "type": "string"
+    },
+    "topic": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::topic.topic"
+    },
+    "expert": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::expert.expert"
     }
   }
 }
