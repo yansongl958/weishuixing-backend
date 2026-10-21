@@ -732,7 +732,7 @@ export interface ApiExpertExpert extends Struct.CollectionTypeSchema {
       Schema.Attribute.DefaultTo<'lecturer'>;
     articals: Schema.Attribute.Relation<'manyToMany', 'api::artical.artical'>;
     avatar: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    bio: Schema.Attribute.String;
+    bio: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

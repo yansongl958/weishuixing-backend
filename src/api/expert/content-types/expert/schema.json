@@ -24,7 +24,7 @@
       "type": "string"
     },
     "bio": {
-      "type": "string"
+      "type": "text"
     },
     "avatar": {
       "type": "media",
