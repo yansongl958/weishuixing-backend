@@ -5,6 +5,7 @@ import { factories } from '@strapi/strapi';
 // - 登录会员：再加全文 content、走过的弯路 detours
 // - 参加过任意一期培训（报名状态 attended）的会员：再加附件 attachments
 // 注意：后台不要给 Public / Authenticated 勾 Case-study 的 find、findOne，只勾 publicList、publicDetail
+// 全文以 full_text 返回，不用 content：项目里会员文章的全局处理会拦截名为 content 的字段（会删掉并加 locked）
 
 const PUBLIC_FIELDS = [
   'title',
@@ -128,7 +129,7 @@ export default factories.createCoreController('api::case-study.case-study', ({ s
     const authUser = ctx.state.user;
     if (authUser) {
       data.access = 'member';
-      data.content = c.content || [];
+      data.full_text = c.content || [];
       data.detours = c.detours || [];
 
       if (attachments.length > 0 && (await isAttendee(strapi, authUser.id))) {
