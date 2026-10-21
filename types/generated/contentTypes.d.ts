@@ -820,6 +820,10 @@ export interface ApiLeadLead extends Struct.CollectionTypeSchema {
   };
   attributes: {
     company: Schema.Attribute.String;
+    consulting_service: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::consulting-service.consulting-service'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

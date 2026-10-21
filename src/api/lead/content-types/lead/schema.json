@@ -47,6 +47,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::expert.expert"
+    },
+    "consulting_service": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::consulting-service.consulting-service"
     }
   }
 }
