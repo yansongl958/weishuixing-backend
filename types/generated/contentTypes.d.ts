@@ -484,6 +484,49 @@ export interface ApiArticalArtical extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
+  collectionName: 'case_studies';
+  info: {
+    displayName: '\u6848\u4F8B';
+    pluralName: 'case-studies';
+    singularName: 'case-study';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    attachments: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    award_year: Schema.Attribute.Integer;
+    content: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    detours: Schema.Attribute.Blocks;
+    experts: Schema.Attribute.Relation<'oneToMany', 'api::expert.expert'>;
+    is_excellent: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::case-study.case-study'
+    > &
+      Schema.Attribute.Private;
+    org_name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    region: Schema.Attribute.String;
+    scale: Schema.Attribute.String;
+    slug: Schema.Attribute.UID<'title'>;
+    summary: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+    topics: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCategoreCategore extends Struct.CollectionTypeSchema {
   collectionName: 'categores';
   info: {
@@ -1589,6 +1632,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::artical.artical': ApiArticalArtical;
+      'api::case-study.case-study': ApiCaseStudyCaseStudy;
       'api::categore.categore': ApiCategoreCategore;
       'api::certificate.certificate': ApiCertificateCertificate;
       'api::consulting-service.consulting-service': ApiConsultingServiceConsultingService;

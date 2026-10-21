@@ -1,0 +1,67 @@
+{
+  "kind": "collectionType",
+  "collectionName": "case_studies",
+  "info": {
+    "singularName": "case-study",
+    "pluralName": "case-studies",
+    "displayName": "案例"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "org_name": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "scale": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "text"
+    },
+    "content": {
+      "type": "blocks"
+    },
+    "detours": {
+      "type": "blocks"
+    },
+    "attachments": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "topics": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::topic.topic"
+    },
+    "experts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::expert.expert"
+    },
+    "is_excellent": {
+      "type": "boolean",
+      "default": false
+    },
+    "award_year": {
+      "type": "integer"
+    }
+  }
+}
