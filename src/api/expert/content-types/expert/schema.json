@@ -74,6 +74,34 @@
       "relation": "manyToMany",
       "target": "api::artical.artical",
       "mappedBy": "authors"
+    },
+    "appointment": {
+      "type": "enumeration",
+      "default": "lecturer",
+      "enum": [
+        "advisor",
+        "appointed",
+        "lecturer"
+      ]
+    },
+    "duty_teach": {
+      "type": "boolean",
+      "default": true
+    },
+    "duty_consult": {
+      "type": "boolean",
+      "default": false
+    },
+    "duty_review": {
+      "type": "boolean",
+      "default": false
+    },
+    "duty_answer": {
+      "type": "boolean",
+      "default": false
+    },
+    "honors": {
+      "type": "text"
     }
   }
 }

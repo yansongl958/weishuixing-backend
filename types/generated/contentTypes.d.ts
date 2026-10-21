@@ -559,6 +559,42 @@ export interface ApiCertificateCertificate extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiConsultingServiceConsultingService
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'consulting_services';
+  info: {
+    displayName: 'ConsultingService';
+    pluralName: 'consulting-services';
+    singularName: 'consulting-service';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    deliverables: Schema.Attribute.RichText;
+    duration: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::consulting-service.consulting-service'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    price_note: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'name'>;
+    sort_order: Schema.Attribute.Integer;
+    suitable_for: Schema.Attribute.Text;
+    tagline: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiDownloadLogDownloadLog extends Struct.CollectionTypeSchema {
   collectionName: 'download_logs';
   info: {
@@ -690,13 +726,22 @@ export interface ApiExpertExpert extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    appointment: Schema.Attribute.Enumeration<
+      ['advisor', 'appointed', 'lecturer']
+    > &
+      Schema.Attribute.DefaultTo<'lecturer'>;
     articals: Schema.Attribute.Relation<'manyToMany', 'api::artical.artical'>;
     avatar: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     bio: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    duty_answer: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    duty_consult: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    duty_review: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    duty_teach: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
+    honors: Schema.Attribute.Text;
     institution: Schema.Attribute.String;
     led_studios: Schema.Attribute.Relation<'oneToMany', 'api::studio.studio'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -1542,6 +1587,7 @@ declare module '@strapi/strapi' {
       'api::artical.artical': ApiArticalArtical;
       'api::categore.categore': ApiCategoreCategore;
       'api::certificate.certificate': ApiCertificateCertificate;
+      'api::consulting-service.consulting-service': ApiConsultingServiceConsultingService;
       'api::download-log.download-log': ApiDownloadLogDownloadLog;
       'api::enrollment.enrollment': ApiEnrollmentEnrollment;
       'api::event.event': ApiEventEvent;

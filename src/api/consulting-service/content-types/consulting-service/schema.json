@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "consulting_services",
+  "info": {
+    "singularName": "consulting-service",
+    "pluralName": "consulting-services",
+    "displayName": "ConsultingService"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "tagline": {
+      "type": "string"
+    },
+    "suitable_for": {
+      "type": "text"
+    },
+    "deliverables": {
+      "type": "richtext"
+    },
+    "duration": {
+      "type": "string"
+    },
+    "price_note": {
+      "type": "string"
+    },
+    "sort_order": {
+      "type": "integer"
+    }
+  }
+}
